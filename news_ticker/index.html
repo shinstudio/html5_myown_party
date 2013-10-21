@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>shinstudio :: html5 :: news ticker</title>
+		<style>
+			#border {
+				width: 500px;
+				background: #000;
+				border-radius: 5px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="border">
+			<canvas id="bannershow" width="500" height="150" />
+		</div>
+
+		<script>
+			var globalx = 0;
+			var vector = 2;
+			var interval = 120;
+			var canvas = document.getElementById('bannershow');
+			var ctx = canvas.getContext('2d');
+			var fontsize = 120;
+			var canvasHeight = 150;
+			var canvasWidth = 500;
+
+			function banner(label) {
+
+			    ctx.clearRect(0, 0, canvasWidth, canvasHeight);    
+			    ctx.fillStyle = 'rgb(0, 0, 0)';
+			    ctx.fillRect (0, 0, canvasWidth, canvasHeight);
+			    
+			    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'
+			    ctx.font = fontsize + 'px Helvetica';
+			    ctx.textBaseline = 'top';
+			    if (globalx > canvasWidth) {
+			         globalx = ctx.measureText(label).width * -1;
+			    }
+			    ctx.fillText(label, globalx, (canvasHeight-fontsize)/2);
+			    
+			    globalx += vector;
+			}
+			setInterval(banner, 1000/interval, 'Helvetica');
+		</script>
+	</body>
+</html>
